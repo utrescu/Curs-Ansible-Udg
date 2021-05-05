@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=packettracer
+Icon=pt7
+Type=Application
+Terminal=false
+Name=Packet Tracer 7.0

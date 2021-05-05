@@ -1,0 +1,15 @@
+---
+# tasks file for brackets
+# - name: install brackets
+#   apt:
+#    deb: https://github.com/adobe/brackets/releases/download/release-{{ brackets_release }}/Brackets.Release.{{ brackets_release }}.{{ ansible_userspace_bits }}-bit.deb
+
+- name: add webupd8 brackets repo
+  apt_repository:
+    repo: ppa:webupd8team/brackets
+    filename: brackets
+
+- name: Instal·lar brackets
+  apt:
+    name: brackets
+    state: latest

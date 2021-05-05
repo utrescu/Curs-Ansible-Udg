@@ -1,0 +1,9 @@
+---
+# file: group_vars/all
+# Variables comunes a tots els equips de la xarxa
+#
+ansible_connection: ssh
+ansible_user: usuari
+ubuntu_versio: xenial
+ldap_user: "{{ vault_ldap_user }}"
+ldap_password: "{{vault_ldap_password }}"

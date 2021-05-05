@@ -1,0 +1,52 @@
+---
+# Canvia el hostname a partir del nom que se li dóna en l'inventari
+#
+# La idea és tenir un inventari amb nom i IP:
+#
+#  [alumnes]
+#     i310-04d ansible_ssh_host=192.168.10.32
+#     i310-04e ansible_ssh_host=192.168.10.30
+#     i310-04m ansible_ssh_host=192.168.10.31
+#
+#  Al host se li assignarà el nom definit en l'inventari (en l'exemple
+#  seria 'i310-04..' )
+#
+#  ES RECOMANA REINICIAR DESPRÉS DE FER EL CANVI però per algun motiu
+#  els reinicis fallen completament (reincia però dóna error) ...
+
+- hosts: all
+  user: usuari
+  become: yes
+
+  tasks:
+    # - name: Llista el nom
+    #   debug: msg="{{ inventory_hostname }} - {{ ansible_hostname }} - {{ ansible_default_ipv4.address }}"
+
+    - name: Afegeix el nom a /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^127\.0\.1\.1'
+        line: "127.0.1.1   {{ inventory_hostname }} {{ansible_hostname}}"
+        owner: root
+        group: root
+        mode: 0644
+      when: "inventory_hostname != ansible_hostname"
+
+    - name: Canvia el hostname
+      hostname: name="{{ inventory_hostname }}"
+      when: "inventory_hostname != ansible_hostname"
+
+    - name: Comprova si cal reiniciar
+      register: file
+      stat: path=/var/run/reboot-required get_md5=no
+## NO FUNCIONA ...
+
+# - name: Reinicia
+#   shell: 'shutdown -r now "Ansible canvia el nom"'
+#   async: 1
+#   poll: 0
+#   ignore_errors: true
+#   when: file.stat.exists == true
+# - name: Espera que reinicii
+#   local_action: wait_for host="{{ inventory_hostname }}" port=22 state=started
+

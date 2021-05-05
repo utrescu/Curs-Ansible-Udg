@@ -1,0 +1,15 @@
+---
+- hosts:
+    - xinxan.local
+    - localhost
+  become: yes
+  tasks:
+    - name: Comprovar que està viu
+      ping:
+
+    - name: Instal·lar joe
+      apt:
+        name: joe
+        state: present
+      become: yes
+      when: ansible_os_family == "Debian"

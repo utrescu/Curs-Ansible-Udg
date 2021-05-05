@@ -1,0 +1,9 @@
+---
+# tasks file for alumne-config
+- name: Crear usuari alumne per accés sense xarxa
+  user:
+    name: "{{user_username}}"
+    password: "{{user_password}}"
+    update_password: always
+    shell: /bin/bash
+    state: present

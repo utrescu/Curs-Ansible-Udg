@@ -1,0 +1,33 @@
+---
+# tasks file for ldapserver
+
+- name: Config LDAP objects
+  template:
+    src: "{{ item }}"
+    dest: "/tmp/{{ (item | basename | splitext)[0] }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - dit.ldif.j2
+    - groups.ldif.j2
+    - users.ldif.j2
+
+- name: Adding LDIF objects
+  shell: ldapadd -x -D "cn=Manager,dc={{ openldap_server_domain_name.split('.')[0] }},dc={{ openldap_server_domain_name.split('.')[1] }}" -w {{ openldap_server_rootpw }} -f /tmp/{{ item }} && touch "{{ openldap_server_app_path }}/{{ (item | basename | splitext)[0] }}_created"
+  args:
+     creates: "{{ openldap_server_app_path }}/{{ (item | basename | splitext)[0] }}_created"
+  with_items:
+    - dit.ldif
+    - groups.ldif
+    - users.ldif
+
+- name: Remove LDIF files
+  file:
+    path: "{{ item }}"
+    force: yes
+    state: absent
+  with_items:
+    - dit.ldif
+    - groups.ldif
+    - users.ldif

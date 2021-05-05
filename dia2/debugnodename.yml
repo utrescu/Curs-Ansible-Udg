@@ -1,0 +1,8 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  tasks:
+    - name: Llista hosts
+      debug:
+        msg: "{{ansible_nodename}}"

@@ -1,0 +1,26 @@
+---
+# tasks file for common
+- name: COMMON - Instal·lar programes importants
+  apt: name={{item}} state=latest update_cache=true
+  with_items:
+    - aptitude
+    - joe
+    - build-essential
+
+- name: COMMON - Copiar arxiu de configuració SSHd
+  copy:
+    src: sshd_config
+    dest: /etc/ssh
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    validate: '/usr/sbin/sshd -T -f %s'
+  notify:
+    - Reiniciar SSHd
+
+- name: COMMON - Evitar usuari convidat
+  copy:
+    src: 50-no-guest.conf
+    dest: /etc/lightdm/lightdm.conf.d/50-no-guest.conf
+    force: no

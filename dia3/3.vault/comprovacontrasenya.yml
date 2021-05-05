@@ -1,0 +1,11 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  tasks:
+    - name: Carregar variables secretes
+      include_vars: secret.yml
+
+    - name: Veure si ha arribat
+      debug:
+        msg: "{{ secret.licensekey }}"

@@ -1,0 +1,24 @@
+---
+# tasks file for java
+- name: Installar add-apt-repostory
+  apt: 
+    name: software-properties-common 
+    state: latest
+
+- name: Afegir el repositori Java 
+  apt_repository: 
+    repo: 'ppa:webupd8team/java'
+
+- name: Acceptar la llicència de Java
+  debconf: 
+    name: 'oracle-java8-installer' 
+    question: 'shared/accepted-oracle-license-v1-1' 
+    value: 'true'
+    vtype: 'select'
+
+- name: Instal·lar Oracle Java 8
+  apt: name={{item}} state=latest
+  with_items:
+    - oracle-java8-installer
+    - ca-certificates
+    - oracle-java8-set-default

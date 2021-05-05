@@ -1,0 +1,4 @@
+---
+# defaults file for virtualbox
+virtualbox_version: 5.2.12
+ubuntu_distribucio: "{{ ansible_distribution_release }}"

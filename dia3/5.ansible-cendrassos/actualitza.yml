@@ -1,0 +1,20 @@
+#
+# Actualització dels ordinadors de la xarxa
+#
+#    TODO:
+#    - Falta comprovar VirtualBox (que s'actualitza sol ...) i per tant
+#      falten les guestadditions
+#
+# Versió 1: 14/8/2016
+#     Primera versió
+# Versió 2:  1/9/2017
+#     Canviada l'actualització a roles
+#     Sembla que el vscode afegeix el repositori automàticament
+#
+- hosts: all
+  user: usuari
+  become: true
+  roles:
+    - system-upgrade
+    - { role: atom }
+    - { role: virtualbox-update }

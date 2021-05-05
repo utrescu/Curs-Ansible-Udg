@@ -1,0 +1,7 @@
+---
+- name: start nscd service
+  service:
+    name: nscd
+    state: started
+
+  

@@ -1,0 +1,15 @@
+---
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Comprova si hi ha actualitzacions
+  command: /usr/lib/update-notifier/apt-check --package-names
+  register: pkg_list
+
+- name: Actualitza tots els paquets a la darrera versió
+  apt:
+    upgrade: dist
+    autoremove: yes
+  when: pkg_list.stderr != ""

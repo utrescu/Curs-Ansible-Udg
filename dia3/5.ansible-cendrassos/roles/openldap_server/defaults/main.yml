@@ -1,0 +1,17 @@
+---
+#The domain prefix for ldap
+openldap_server_domain_name: cendrinf.ies
+
+#This is the password for admin for openldap
+openldap_server_rootpw: changeme
+
+#The self signed ssl parameters
+openldap_server_country: ES
+openldap_server_state: girona
+openldap_server_location: Figueres
+openldap_server_organization: informatica
+
+openldap_server_enable_ssl: false
+
+#The ldif file
+openldap_server_ldif: domain.ldif

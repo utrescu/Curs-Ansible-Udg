@@ -1,0 +1,1 @@
+Elimina les carpetes home dels alumnes

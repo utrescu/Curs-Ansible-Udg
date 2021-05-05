@@ -1,0 +1,16 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  vars:
+    programa:
+      - joe
+      - exa
+
+  tasks:
+    - name: Comprovar que està viu
+      ping:
+
+    - name: Instal·lar {{programa}}
+      apt: name={{programa}} state=present
+      become: yes

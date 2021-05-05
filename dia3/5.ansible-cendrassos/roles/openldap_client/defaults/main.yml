@@ -1,0 +1,16 @@
+---
+# defaults file for openldap_client
+ldap_client_paquets:
+  - libpam-ldap
+  - nscd
+  - nslcd
+  - sysv-rc-conf
+  - ldap-auth-client
+  - ldap-utils
+localgroups: "*;*;*;Al0000-2400;audio,cdrom,dialout,floppy,docker,vboxusers"
+ldap_config:
+  base: "dc=cendrinf,dc=ies"
+  uri: "ldap://192.168.4.11"
+  rootbinddn: "cn=Manager,dc=cendrinf,dc=ies"
+  port: 389
+  secret: changeme

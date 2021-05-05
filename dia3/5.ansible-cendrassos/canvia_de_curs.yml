@@ -1,0 +1,24 @@
+# Canvia els ordinadors dels alumnes per començar
+# un nou curs.
+#
+#  - Actualitza programes (i elimina els que ja no calen)
+#     - comprova que hi ha els programes necessaris
+#     - dist-upgrade
+#     - Actualitza Virtualbox + Extension pack
+#  - Elimina tot el que hi havia en les carpetes /home
+#
+
+- hosts: alumnes
+  user: usuari
+  become: true
+  roles:
+    # Coses noves
+    # ------------------
+    - { role: programes }
+    - { role: netcore }
+    - { role: canvia-curs }
+    # Actualització normal
+    # ------------------
+    - { role: system-upgrade }
+    - { role: atom }
+    - { role: virtualbox-update }

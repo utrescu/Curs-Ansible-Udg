@@ -1,0 +1,12 @@
+---
+- name: Using Podman collection
+  hosts: localhost
+  collections:
+    - containers.podman
+  tasks:
+    - name: Inicia un contenidor nginx
+      podman_container:
+        name: webserver
+        image: nginx
+        state: present
+        recreate: yes

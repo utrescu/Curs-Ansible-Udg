@@ -1,0 +1,24 @@
+---
+# Configura els usuaris perquè puguin fer servir docker
+#
+#   - D'entrada s'afegeix l'usuari que es fa servir per fer la configuració però
+#     també es prova l'usuari 'alumne'
+#
+
+- name: afegir l'usuari principal al grup 'docker'
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+
+- name: Comprova que existeix l'usuari '{{user_username}}'
+  command: "awk -F':' '/{{user_username}}/{ print $1 }' /etc/passwd"
+  register: existeix_alumne
+  changed_when: False
+
+- name: afegir 'alumne' al grup 'docker'
+  user:
+    name: "{{ user_username }}"
+    groups: docker
+    append: yes
+  when: existeix_alumne.stdout | match("{{user_username}}")

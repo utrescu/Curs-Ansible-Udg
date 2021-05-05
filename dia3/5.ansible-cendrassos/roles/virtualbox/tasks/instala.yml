@@ -1,0 +1,19 @@
+# Instal·la VirtualBox i el extension pack
+#
+#
+- name: Instal·lar VirtualBox
+  apt:
+    name: virtualbox-{{ virtualbox_version.split('.')[0] }}.{{ virtualbox_version.split('.')[1] }}
+    state: present
+
+- name: Comprova si l'extension pack ja hi és
+  shell: "VBoxManage list extpacks"
+  register: extpack_list
+
+- name: Descarregar VirtualBox extension pack
+  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox_version}}/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox_version}}.vbox-extpack"
+  when: 'extpack_list.stdout == "Extension Packs: 0"'
+
+- name: Instal·lar VirtualBox extension pack
+  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox_version}}.vbox-extpack"
+  when: 'extpack_list.stdout == "Extension Packs: 0"'

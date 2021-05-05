@@ -1,0 +1,21 @@
+- name: si hi ha una versió vella s'ha de treure
+  apt:
+    name: lxc-docker
+    purge: yes
+  failed_when: no
+
+- name: instal·lar docker-engine
+  apt:
+    name: docker-engine
+    state: latest
+
+- name: Obtenir docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+
+- name: Comprova que el servei està en marxa
+  service:
+    name: docker
+    state: started

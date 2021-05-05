@@ -1,0 +1,19 @@
+---
+# file: installa_servidors.yml
+#
+# Instal·lació del servidor LDAP a les màquines que estiguin
+# llistades a servidors.
+#
+#    - Per defecte treu les dades de group_vars/servidors
+#
+# Versió 1: 14/8/2016
+#    OpenLdapServer tret d'un exemple de github https://github.com/bennojoy/openldap_server
+#
+- hosts: servidors
+  user: usuari
+  become: true
+
+  roles:
+    - common
+    - role: openldap_server
+    - role: openldap_server_config

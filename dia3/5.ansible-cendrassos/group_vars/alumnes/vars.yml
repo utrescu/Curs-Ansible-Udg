@@ -1,0 +1,3 @@
+---
+user_username: alumne
+user_password: { { vault_user_password } }

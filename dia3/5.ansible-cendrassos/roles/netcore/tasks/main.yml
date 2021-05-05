@@ -1,0 +1,30 @@
+---
+- name: .NET - Comprovar que es suporta HTTPS
+  package:
+    name: apt-transport-https
+    state: present
+    update_cache: true
+
+- name: .NET | Add apt key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+  register: result
+  until: '"failed" not in result'
+  retries: 3
+  delay: 5
+
+- name: .NET | Afegir el repositori
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-{{ ubuntu_distribution }}-prod {{ ubuntu_distribution }} main
+    state: present
+
+- name: .NET | Instal·lar el SDK
+  package:
+    name: "{{ dotnet_ubuntu_package }}"
+    state: present
+    update_cache: true
+  register: result
+  until: '"failed" not in result'
+  retries: 3
+  delay: 5

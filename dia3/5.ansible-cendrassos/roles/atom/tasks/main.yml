@@ -1,0 +1,17 @@
+---
+# Comprovem si cal instal·lar Atom o no cal perquè ja tenim
+# la darrera versió.
+
+- name: Comprova la versió instal·lada d'Atom
+#  shell: "atom --version  | grep -i Atom | egrep -o '[0-9\\.]+$' || echo ''"
+  shell: "apt-cache show atom | grep 'Version' | egrep -o '[0-9\\.]+$' || echo ''"
+  register: atom_home
+
+- name: Comprova la darrera versió d'Atom
+  shell: "curl -o /dev/null --silent --head --write-out '%{redirect_url}\n' https://github.com/atom/atom/releases/latest | egrep -o '[0-9\\.]+$'"
+  register: atom_online
+
+- include_tasks: install.yml
+  when: atom_online.stdout != atom_home.stdout
+  tags: install
+

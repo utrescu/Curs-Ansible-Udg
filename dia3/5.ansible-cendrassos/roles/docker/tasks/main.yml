@@ -1,0 +1,15 @@
+---
+# tasks file for docker
+
+- include: configura.yml
+  when: ansible_os_family == 'Debian'
+  tags: config
+
+- include: instala.yml
+  when: ansible_os_family == 'Debian'
+  tags: install
+
+- include: afegeix_usuaris.yml
+  when: ansible_os_family == 'Debian'
+  tags: postconfig
+

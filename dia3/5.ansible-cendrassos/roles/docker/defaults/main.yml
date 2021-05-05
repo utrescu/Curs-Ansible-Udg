@@ -1,0 +1,4 @@
+---
+# defaults file for docker
+ubuntu_distribucio: "{{ ansible_distribution_release }}"
+docker_compose_version: 1.8.0

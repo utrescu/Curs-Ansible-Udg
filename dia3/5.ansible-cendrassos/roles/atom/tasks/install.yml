@@ -1,0 +1,7 @@
+# instal·la atom
+- name: Descarregar Atom per versions Debian
+  get_url: url={{ atom_url_deb }} dest={{ atom_tmp_deb }} force=yes
+
+
+- name: Instal·lar Atom
+  apt: deb={{atom_tmp_deb}}

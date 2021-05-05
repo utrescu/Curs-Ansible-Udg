@@ -1,0 +1,12 @@
+---
+# file: site.yml
+#
+# Instal·lació de tots ordinadors de la xarxa
+# en el mateix moment.
+#
+# Versió 1: 12/8/2016
+#
+- include: installa_alumnes.yml
+- include: installa_servidors.yml
+
+

@@ -1,0 +1,31 @@
+---
+# defaults file for programes
+#
+# Programes a instal·lar en el sistema.
+#
+programes:
+  desenvolupament:
+    - wireshark
+    - build-essential
+    - vim
+    - subversion
+    - git-flow
+    - whois
+    - libxml2-utils
+    - mysql-client
+  diversos:
+    - gimp
+    - shutter
+    - dia
+    - dia-shapes
+    - vlc
+    - xournal
+    - flashplugin-installer
+    - libreoffice-base
+    - libreoffice-impress
+    - hardinfo
+    - recordmydesktop
+    - gtk-recordmydesktop
+    - xmlstarlet
+    - audacity
+

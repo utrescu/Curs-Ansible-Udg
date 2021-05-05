@@ -1,0 +1,6 @@
+---
+# handlers file for grub-password
+
+- name: grub-v2-update-config
+  command: "{{ grub_mkconfig }} -o /boot/grub/grub.cfg"
+

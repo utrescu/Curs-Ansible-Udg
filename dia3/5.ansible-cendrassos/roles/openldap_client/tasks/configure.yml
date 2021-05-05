@@ -1,0 +1,79 @@
+---
+# Copiar els arxius de configuració
+- name: copiar nsswitch.conf
+  template:
+    src: nsswitch.conf.j2
+    dest: /etc/nsswitch.conf
+    force: true
+    backup: true
+
+- name: copiar common-password
+  template:
+    src: common-password.j2
+    dest: /etc/pam.d/common-password
+    force: true
+    backup: true
+
+- name: copiar common-session
+  template:
+    src: common-session.j2
+    dest: /etc/pam.d/common-session
+    force: true
+    backup: true
+
+- name: copiar common-auth
+  template:
+    src: common-auth.j2
+    dest: /etc/pam.d/common-auth
+    force: true
+    backup: true
+
+- name: copiar ldap server configurations
+  template:
+    src: ldap.conf.j2
+    dest: /etc/ldap.conf
+    force: true
+    backup: true
+    mode: 0644
+
+- name: copiar ldap secret password
+  template:
+    src: ldap.secret.j2
+    dest: /etc/ldap.secret
+    mode: 0600
+
+- name: copiar fitxer de configuració de nslcd
+  template:
+    src: nslcd.conf.j2
+    dest: /etc/
+    owner: "root"
+    group: "nslcd"
+    mode: 0640
+
+- name: Copiar fitxer de creació de carpetes home
+  copy:
+    src: my_mkhomedir
+    dest: /usr/share/pam-configs/
+    mode: 0644
+
+#- name: Crear configuració de grups
+#  shell: "echo '{{ localgroups }}' >>  /etc/security/group.conf"
+
+- name: Crear configuració de grups
+  lineinfile:
+    dest: /etc/security/group.conf
+    regexp: ""
+    insertafter: EOF
+    line: "{{ localgroups }}"
+
+- name: Copiar el fitxer per activar els grups
+  copy:
+    src: my_groups
+    dest: /usr/share/pam-configs/
+    mode: 0644
+
+- name: Executar pam-auth-update
+  shell: DEBIAN_FRONTEND=noninteractive pam-auth-update
+  notify:
+    - restart nscd service
+    - restart nslcd service

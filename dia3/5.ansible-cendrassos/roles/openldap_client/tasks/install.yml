@@ -1,0 +1,12 @@
+---
+# filename: tasks/install.yml
+- name: instal.lar el client openldap
+  apt:
+    name: "{{ ldap_client_paquets }}"    
+    cache_valid_time: 3600
+
+- name: Activar el mòdul libnss 
+  shell: sysv-rc-conf libnss-ldap on
+  notify:
+    - restart nscd service
+

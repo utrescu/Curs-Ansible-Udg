@@ -1,0 +1,22 @@
+{% set gid = 16001 %}
+{% for user in openldap_server_config_usuaris %}
+# {{ user.nom }}
+dn: uid={{ user.nom }},ou=People,dc={{ openldap_server_domain_name.split('.')[0] }},dc={{ openldap_server_domain_name.split('.')[1] }}
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: {{ user.nom }}
+uid: {{ user.nom }}
+uidNumber: {{ gid }}
+gidNumber: 1001
+homeDirectory: /home/{{ user.nom }}
+loginShell: /bin/bash
+gecos: {{ user.nom }}
+userPassword: {{ user.contra }}
+shadowLastChange: 17000
+shadowMax: 999999
+shadowWarning: 7
+
+{% set gid = gid + 1 %}
+{% endfor %}

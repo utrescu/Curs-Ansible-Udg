@@ -1,0 +1,21 @@
+---
+# tasks file for packet-tracer
+- name: Copiar el programa i descomprimir-lo
+  unarchive:
+    src: PacketTracer70_64bit_linux.tar.gz
+    dest: /tmp
+
+- name: Copiar l'script modificat perquè no demani res
+  copy:
+    src: install
+    dest: /tmp/PacketTracer70
+    mode: 0744
+
+- name: Executar l'instal·lador
+  shell: /tmp/PacketTracer70/install
+
+- name: Modificar l'arxiu Desktop perquè no funciona
+  copy:
+    src: pt7.desktop
+    dest: /usr/share/applications/
+    mode: 0644

@@ -1,0 +1,23 @@
+---
+- name: "Crear el superUsuari de Grub"
+  lineinfile:
+    dest: /etc/grub.d/40_custom
+    regexp: "^set superusers="
+    state: present
+    insertafter: EOF
+    line: 'set superusers="{{ grub_admin }}"'
+  notify:
+    - grub-v2-update-config
+
+- name: "Afegir contrasenya de Grub"
+  lineinfile:
+    dest: /etc/grub.d/40_custom
+    regexp: "^password_pbkdf2 {{ grub_admin }} "
+    state: present
+    insertafter: EOF
+    line: "password_pbkdf2 {{ grub_admin }} {{ grub_password }}"
+
+- name: "No restringir fitxers de Grub ..."
+  replace: dest={{ item }} regexp='^CLASS="(((?!--unrestricted).)*)"$' replace='CLASS="\1 --unrestricted"'
+  with_items: "{{grub_unrestricted_files}}"
+  when: grub_unrestricted

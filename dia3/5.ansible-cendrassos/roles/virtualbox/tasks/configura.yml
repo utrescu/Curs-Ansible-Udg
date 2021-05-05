@@ -1,0 +1,22 @@
+# Configurar VirtualBox perquè pugui ser instal·lat
+#
+#
+- name: Instal·lar build-esential i dkms (fan falta)
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - build-essential
+    - dkms
+    - unzip
+
+- name: Clau de signat de VirtualBox
+  apt_key:
+    state: present
+    url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+
+- name: Afegir el repositori de VirtualBox
+  apt_repository:
+    repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ubuntu_distribucio }} contrib"
+    update_cache: yes

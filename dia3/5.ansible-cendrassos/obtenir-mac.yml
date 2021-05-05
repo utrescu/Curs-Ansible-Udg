@@ -1,0 +1,27 @@
+---
+# Obtenir la MAC, el host i la IP de la classe
+#
+#  - només necessita l'inventari amb la IP (Ansible considerarà
+#    que el hostname és el que hi hagi en l'inventari)
+#
+#  - Llista:
+#     id de l'inventari - hostname - MAC - IP
+#
+#     o bé prepara un inventari per preparar el hostname
+#
+#  - Per evitar la sortida en JSON es pot combinar amb 'grep' i 'cut':
+#
+#      ansible-playbook -k -K -i hosts.list obtenir-mac.yml | grep resultat | cut -d \" -f 4 -
+#
+
+- hosts: all
+  user: usuari
+  become: yes
+  vars:
+    resultat: "{{ ansible_hostname }} ansible_ssh_host={{ ansible_default_ipv4.address }}"
+  tasks:
+    # - name: Llista el nom
+    #   debug: msg="{{ inventory_hostname }} - {{ ansible_hostname }} - {{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }} - {{ ansible_default_ipv4.address }}"
+
+    - name: Obtenir el resultat
+      debug: var=resultat

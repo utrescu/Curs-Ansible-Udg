@@ -1,0 +1,12 @@
+---
+# handlers file for ldap
+- name: restart nscd service
+  service: 
+    name: nscd
+    state: restarted
+
+- name: restart nslcd service 
+  service:
+    name: nslcd
+    state: restarted
+  

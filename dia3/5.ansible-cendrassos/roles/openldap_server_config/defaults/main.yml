@@ -1,0 +1,15 @@
+---
+# defaults file for ldapserver
+
+# Creació dels usuaris:
+#
+# - La contrasenya s'ha de xifrar amb slap
+#
+#      slappasswd -h {SHA} -s contrasenya
+#
+
+openldap_server_config_usuaris:
+  - { nom: alumne1smx, contra: "{SHA}HQi6qzB5W122okz/84MeF8UMIRI=" } # AMDShow!
+  - { nom: alumne2smx, contra: "{SHA}nGiqEdTDJwd6eiocuxl1RyYaHP0=" } # BridgeOn!
+  - { nom: alumne1daw, contra: "{SHA}FeMcwCNdfjXNLNPbq4nBZmrlm7w=" } # DAWMe4lg0!
+  - { nom: alumne2daw, contra: "{SHA}+ILmdv5f1K3TDXGuy/ly+rZEpRA=" } # ChangeData?

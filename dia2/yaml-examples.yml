@@ -1,0 +1,21 @@
+nom: "valor"
+numero: 2
+senseres: null
+
+llista:
+  - "un"
+  - "dos"
+
+llista2: ["un", "dos"]
+
+pi_family:
+  - nom: "Pere"
+    cognom: "Pi"
+  - nom: "Pau"
+    cognom: "Pi"
+  - { nom: "Maria", cognom: "Pi" }
+
+descripcio: >
+  aaaaaaaaaaaaa
+  aaaaaaaaaaaaa
+  aaaaaaaaaaaaa

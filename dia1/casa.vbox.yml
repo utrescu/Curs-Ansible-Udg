@@ -1,0 +1,6 @@
+plugin: virtualbox
+settings_password_file: /etc/virtualbox/secrets
+query:
+  logged_in_users: /VirtualBox/GuestInfo/OS/LoggedInUsersList
+compose:
+  ansible_connection: ('indows' in vbox_Guest_OS)|ternary('winrm', 'ssh')

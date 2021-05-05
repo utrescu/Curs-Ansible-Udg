@@ -1,0 +1,25 @@
+---
+# Canviar la contrasenya de root
+#   S'ha de generar un hash:
+#      $ sudo pip install passlib
+#      $ python -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'
+#
+#
+#   -- La contrasenya es posa a group_vars/alumnes/vault.yml
+#
+#   El procés es crida amb --ask-vault-pass o --vault-password-file
+
+# versió 1: 11/08/2016
+#    - comprovat
+#      // OLD VERSION: $ python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+
+- hosts: alumnes
+  user: usuari
+  become: yes
+
+  tasks:
+    - name: Canviar la contrasenya de '{{ user_username }}'
+      user:
+        name: "{{ user_username }}"
+        update_password: always
+        password: "{{ user_password }}"

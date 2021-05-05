@@ -1,0 +1,21 @@
+---
+# tasks de configuració per instal·lar Docker
+#
+
+- name: afegir la clau del repositori Docker
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- name: Afegir el repositori Docker
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ubuntu_distribucio }} main"
+    update_cache: yes
+
+  # For Ubuntu Trusty, Vivid, and Wily, it’s recommended to install the linux-image-
+  # extra kernel package. The linux-image-extra package allows you use the aufs
+  # storage driver.
+  # https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/
+
+- name: allow use of aufs storage driver
+  shell: apt-get install linux-image-extra-$(uname -r)

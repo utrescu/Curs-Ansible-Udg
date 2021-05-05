@@ -1,0 +1,26 @@
+---
+# Configura els usuaris perquè puguin fer servir docker
+#
+#   - D'entrada s'afegeix l'usuari que es fa servir per fer la configuració però
+#     també es prova l'usuari 'alumne'
+#
+
+- name: afegir l'usuari principal al grup 'vboxusers'
+  user:
+    name: "{{ ansible_ssh_user }}"
+    groups: vboxusers
+    append: yes
+
+- name: Comprova que existeix l'usuari 'alumne'
+  command: "awk -F':' '/^alumne/{ print $1 }' /etc/passwd"
+  register: existeix_alumne
+  changed_when: False
+
+- name: afegir 'alumne' al grup 'vboxusers'
+  user:
+    name: alumne
+    groups: vboxusers
+    append: yes
+  when: existeix_alumne.stdout | match("alumne")
+
+

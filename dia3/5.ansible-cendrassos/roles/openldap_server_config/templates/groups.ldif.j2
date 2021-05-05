@@ -1,0 +1,14 @@
+# Groups
+dn: cn=professors,ou=Groups,dc={{ openldap_server_domain_name.split('.')[0] }},dc={{ openldap_server_domain_name.split('.')[1] }}
+objectClass: posixGroup
+objectClass: top
+cn: professors
+gidNumber: 1000
+description: Professors del centre
+
+dn: cn=alumnes,ou=Groups,dc={{ openldap_server_domain_name.split('.')[0] }},dc={{ openldap_server_domain_name.split('.')[1] }}
+objectClass: posixGroup
+objectClass: top
+cn: Alumnes
+gidNumber: 1001
+description: Alumnes del centre

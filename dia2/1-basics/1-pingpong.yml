@@ -1,0 +1,7 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  tasks:
+    - name: comprova visibilitat
+      ping:

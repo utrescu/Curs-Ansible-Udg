@@ -1,6 +1,8 @@
 [casa]
-locahost ansible_user=xavier
+locahost
 
 [debians]
 xinxan.local ansible_user=pi
 
+[all:vars]
+ansible_user=xavier

@@ -1,6 +1,5 @@
 ---
-- hosts: xinxan.local
-  user: pi
+- hosts: debians
 
   tasks:
     - name: Llista hosts

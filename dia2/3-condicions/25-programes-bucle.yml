@@ -5,7 +5,7 @@
   vars:
     programa:
       - joe
-      - exa
+      - htop
 
   tasks:
     - name: Comprovar que està viu

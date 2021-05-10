@@ -1,0 +1,19 @@
+---
+- hosts: xinxan.local
+  tasks:
+    - name: COMMON - Copiar arxiu de configuració SSHd
+      copy:
+        src: sshd_config
+        dest: /etc/ssh
+        owner: root
+        group: root
+        mode: 0644
+        backup: yes
+        validate: "/usr/sbin/sshd -T -f %s"
+      notify:
+        - Reiniciar SSHd
+  handlers:
+    - name: Reiniciar SSHd
+      service:
+        name: ssh
+        state: restarted

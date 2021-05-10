@@ -240,6 +240,13 @@ ansible xinxan.local -i hosts -u pi -m setup -a "gather_subset=min"
 ansible scotty -i inventari -m setup
 ```
 
+No haver de definir l'inventari cada cop?
+
+```ini
+[defaults]
+inventory = ./inventari
+```
+
 ## Copiar arxius?
 
 ```bash
@@ -255,7 +262,7 @@ Paràmetre `force:yes`
 
 ## Gestió de programes
 
-Instal·lar un programa: (**yum**, **apt**, etc... ) become (-b), ask password **-k**, sudo password **-K**)
+Instal·lar un programa: (**yum**, **apt**, etc... ) become (**-b**), ask password **-k**, sudo password **-K**)
 
 ```bash
 ansible xinxan.local -u pi -b -m apt "name=joe state=present"

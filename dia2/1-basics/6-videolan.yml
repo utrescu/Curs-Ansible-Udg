@@ -1,0 +1,15 @@
+---
+- hosts: scotty
+  vars:
+    - url: https://ftp.cixug.es/videolan/vlc/3.0.13/win64/vlc-3.0.13-win64.msi
+
+  tasks:
+    - name: Descarregar VideoLan
+      win_get_url:
+        url: "{{ url }}"
+        dest: C:\tmp\vlc.msi
+
+    - name: Instal·lar VLC
+      win_package:
+        path: C:\tmp\vlc.msi
+        state: present

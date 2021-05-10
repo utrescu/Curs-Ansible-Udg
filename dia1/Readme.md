@@ -1,63 +1,17 @@
 # Dia1
 
-## Configurar SSH
+## Instal·lar
 
-ssh-genkey
-
-ssh-copy-id
-
-## Comandes a localhost
+### Linux Master
 
 ```bash
-ansible all -i "localhost," -m ping
+apt install ansible
 ```
 
-## Inventari
-
-Generar inventari manualment:
-
-```ini
-localhost
-xinxan.local
-```
-
-Veure què hi ha:
+I comprovar
 
 ```bash
-ansible all -i hosts --list-hosts
-```
-
-### Inventari agrupat
-
-```ini
-[fedora]
-locahost
-
-[debians]
-xinxan.local
-```
-
-### Inventari amb variables:
-
-```ini
-[fedora]
-locahost
-
-[debians]
-xinxan.local ansible_user=pi
-```
-
-### Inventari amb variables exteses
-
-```ini
-[casa]
-locahost
-
-[debians]
-xinxan.local ansible_user=pi
-
-[all:vars]
-ansible_user=xavier
+ansible localhost -m ping
 ```
 
 ### Windows Master
@@ -121,6 +75,16 @@ SIS.TI.UDG.ES = {
 udg.edu = SIS.TI.UDG.ES
 ```
 
+## Comprovar ping
+
+```bash
+ansible xinxan.local -i inventari -m ping
+```
+
+```bash
+ansible all -i inventari -m ping
+```
+
 ### Windows Hosts a administrar
 
 S'ha d'activar `winrm` (Windows Remote Management). En les darreres versions està instal·lat per defecte però el servei no està activat.
@@ -143,6 +107,60 @@ ansible_winrm_server_cert_validation=ignore
 
 ```bash
 ansible scotty -i inventari -k -m win_ping
+```
+
+## Comandes a localhost
+
+```bash
+ansible all -i "localhost," -m ping
+```
+
+## Inventari
+
+Generar inventari manualment:
+
+```ini
+localhost
+xinxan.local
+```
+
+Veure què hi ha:
+
+```bash
+ansible all -i hosts --list-hosts
+```
+
+### Inventari agrupat
+
+```ini
+[fedora]
+locahost
+
+[debians]
+xinxan.local
+```
+
+### Inventari amb variables:
+
+```ini
+[fedora]
+locahost
+
+[debians]
+xinxan.local ansible_user=pi
+```
+
+### Inventari amb variables exteses
+
+```ini
+[casa]
+locahost
+
+[debians]
+xinxan.local ansible_user=pi
+
+[all:vars]
+ansible_user=xavier
 ```
 
 ### Inventaris dinàmics
@@ -237,7 +255,7 @@ Paràmetre `force:yes`
 
 ## Gestió de programes
 
-Instal·lar un programa: (**yum** i **apt** ) become (-b), ask password **-k**, sudo password **-K**)
+Instal·lar un programa: (**yum**, **apt**, etc... ) become (-b), ask password **-k**, sudo password **-K**)
 
 ```bash
 ansible xinxan.local -u pi -b -m apt "name=joe state=present"
@@ -248,7 +266,7 @@ Es pot repetir la comanda i comprovar que no el torna a provar d'instal·lar "ch
 Treure el programa:
 
 ```bash
-ansible xinxan.local -b -m apt "name=joe state=present"
+ansible xinxan.local -b -m apt "name=joe state=absent"
 ```
 
 ### Instal.lar software en Windows
@@ -262,9 +280,3 @@ ansible scotty.udg.edu -i inventari -k -m win_chocolatey -a "name=7zip.install s
 ```bash
 ansible xinxan.local -b -K -m service -a "name=nginx state=started enabled=yes"
 ```
-
-## Inventaris
-
-#### executar comandes a virtualbox
-
-Bàsicament és el mateix però fent servir el plugin

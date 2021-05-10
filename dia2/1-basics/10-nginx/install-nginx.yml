@@ -1,0 +1,28 @@
+---
+- name: Configurar pàgina web amb nginx
+  hosts: ubuntot.local
+  become: yes
+  tasks:
+    - name: Instal·lar nginx
+      apt: name=nginx update_cache=no
+
+    - name: Copiar pàgina web
+      copy:
+        src: web
+        dest: /var/www/html
+        mode: 0644
+
+    - name: desctivar configuració per defecte
+      file: path=/etc/nginx/sites-enabled/default state=absent
+
+    - name: copiar configuració de la nova web
+      copy: src=nginx.conf dest=/etc/nginx/sites-available/web
+
+    - name: Activar nova configuració
+      file:
+        dest: /etc/nginx/sites-enabled/web
+        src: /etc/nginx/sites-available/web
+        state: link
+
+    - name: reiniciar nginx
+      service: name=nginx state=restarted

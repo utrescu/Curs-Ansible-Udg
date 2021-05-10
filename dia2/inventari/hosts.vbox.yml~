@@ -1,3 +1,0 @@
-plugin: virtualbox
-groups:
-  debians: "'Ubunt' in (inventory_hostname)"

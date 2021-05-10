@@ -223,6 +223,21 @@ ansible scotty -m win_package -a 'path=C:\\tmp\\vlc.msi state=absent'
       service: name=nginx state=restarted
 ```
 
+Evidentment el que estaria més bé seria que **nginx només es reinicii si cal**:
+
+```yaml
+    - name: Activar nova configuració
+      file:
+        dest: /etc/nginx/sites-enabled/web
+        src: /etc/nginx/sites-available/web
+        state: link
+      notify: reinciar nginx
+
+    handlers:
+    - name: reiniciar nginx
+      service: name=nginx state=restarted
+```
+
 També s'han de **Copiar els tres arxius**
 
 ## Templates

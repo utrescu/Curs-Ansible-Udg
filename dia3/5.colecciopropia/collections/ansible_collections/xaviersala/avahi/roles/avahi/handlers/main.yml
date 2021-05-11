@@ -1,0 +1,4 @@
+---
+# handlers file for avahi
+- name: Avahi restart
+  service: name=avahi-daemon state=started enabled=yes

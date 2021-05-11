@@ -1,0 +1,26 @@
+### REQUIRED
+
+namespace: xaviersala
+name: avahi
+version: 1.0.0
+readme: README.md
+authors:
+  - Xavier Sala <xaviersala@domain.com>
+
+### OPTIONAL but strongly recommended
+
+description: Installation of Avahi Daemon
+
+license:
+  - GPL-2.0-or-later
+
+license_file: ""
+
+tags: [linux]
+
+dependencies: {}
+
+repository: http://example.com/repository
+documentation: http://docs.example.com
+homepage: http://example.com
+issues: http://example.com/issue/tracker

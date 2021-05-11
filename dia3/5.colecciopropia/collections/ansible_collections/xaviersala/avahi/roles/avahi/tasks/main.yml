@@ -1,0 +1,17 @@
+---
+# tasks file for avahi
+- name: Instal·la el servidor apt
+  apt:
+    name: avahi-daemon
+    state: present
+  with_items: "{{ programs_debian }}"
+  when: ansible_os_family == "Debian"
+  notify: Avahi restart
+
+- name: Instal·la el servidor en yum
+  yum:
+    name: nss-mdns avahi
+    state: present
+  with_items: "{{ programs_redhat }}"
+  when: ansible_os_family == "RedHat"
+  notify: Avahi restart

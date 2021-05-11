@@ -1,0 +1,9 @@
+---
+# defaults file for avahi
+programs_debian:
+  - avahi-daemon
+  - avahi-utils
+programs_redhat:
+  - nss-mdns
+  - avahi
+  - avahi-tools

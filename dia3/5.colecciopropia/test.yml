@@ -1,0 +1,10 @@
+---
+- hosts: ubuntot.local
+  become: true
+  collections:
+    - xaviersala.avahi
+
+  tasks:
+    - name: configure Avahi
+      import_role:
+        name: avahi

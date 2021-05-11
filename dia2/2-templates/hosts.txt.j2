@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+{%if mostra_loopback %}
+# màquina local
+127.0.0.1 {{ inventory_hostname | lower }} {{ inventory_hostname_short | lower }}
+{% endif %}
+
+# altres màquines
+{% for host in groups['all'] %}
+{{ hostvars[host]['ansible_default_ipv4']['address'] | default('#') }} {{ hostvars[host]['ansible_hostname'] | default("")}} {{ host }}{{ '\n' -}}
+{% endfor %}

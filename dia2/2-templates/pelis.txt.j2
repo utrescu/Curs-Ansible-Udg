@@ -1,0 +1,8 @@
+{% for peli in pelis %}
+
+{{ peli.titol }}
+----------------
+{% for personatge in peli.personatges %}
+- {{ personatge }}
+{% endfor %}
+{% endfor %}

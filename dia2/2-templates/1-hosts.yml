@@ -1,0 +1,13 @@
+- hosts: xinxan.local
+  become: true
+
+  vars:
+    - fitxer: hosts.txt
+    - mostra_loopback: true
+
+  tasks:
+    - name: Crea el fitxer de hosts
+      template:
+        src: "{{ fitxer }}.j2"
+        dest: "/home/{{ansible_user}}/{{ fitxer }}"
+        backup: true

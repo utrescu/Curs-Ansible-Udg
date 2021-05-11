@@ -1,0 +1,29 @@
+- hosts: xinxan.local
+
+  vars:
+    pelis:
+      - titol: "Star Wars"
+        personatges:
+          - Luke Skywalker
+          - Leia Organa
+          - Han Solo
+          - Chewbacca
+          - Ben Obi-Wan Kenobi
+          - C-3PO
+          - R2-D2
+          - Dart Vader
+      - titol: "Star Trek"
+        personatges:
+          - James T. Kirk
+          - Spock
+          - Leonard McCoy
+          - Montgomery Scott
+          - Nyota Uhura
+          - Pavel Checkov
+          - Hikaru Sulu
+
+  tasks:
+    - name: Crea el fitxer
+      template:
+        src: pelis.txt.j2
+        dest: "/home/{{ansible_user}}/pelis.txt"

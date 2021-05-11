@@ -1,33 +1,5 @@
 # Dia 2
 
-## YAML?
-
-Funcionamemt bàsic
-
-```yaml
-nom: "valor"
-numero: 2
-senseres: null
-
-llista:
-  - "un"
-  - "dos"
-
-llista2: ["un", "dos"]
-
-pi_family:
-  - nom: "Pere"
-    cognom: "Pi"
-  - nom: "Pau"
-    cognom: "Pi"
-  - { nom: "Maria", cognom: "Pi" }
-
-descripcio: >
-  aaaaaaaaaaaaa
-  aaaaaaaaaaaaa
-  aaaaaaaaaaaaa
-```
-
 ## Variables
 
 ### setup
@@ -71,6 +43,10 @@ simplement per emetre logs
 ansible xinxan.local -i inventari -m debug -a 'msg={ansible_nodename}'
 ```
 
+```bash
+ansible xinxan.local -i inventari -m debug -a '{{ ansible_default_ipv4_address }}'
+```
+
 ### Extra variables
 
 ```bash
@@ -78,6 +54,36 @@ ansible xinxan.local -i inventari -e Hola="Pere" -m shell -a "echo {{Hola}}"
 ```
 
 ## Playbooks
+
+### 0. YAML?
+
+Funcionamemt bàsic
+
+```yaml
+nom: "valor"
+numero: 2
+senseres: null
+
+llista:
+  - "un"
+  - "dos"
+
+llista2: ["un", "dos"]
+
+pi_family:
+  - nom: "Pere"
+    cognom: "Pi"
+  - nom: "Pau"
+    cognom: "Pi"
+  - { nom: "Maria", cognom: "Pi" }
+
+descripcio: >
+  aaaaaaaaaaaaa
+  aaaaaaaaaaaaa
+  aaaaaaaaaaaaa
+```
+
+S'hi pot accedir amb `[]` o amb `.`
 
 ### 1. Ping playbook
 
@@ -93,7 +99,9 @@ ansible xinxan.local -i inventari -e Hola="Pere" -m shell -a "echo {{Hola}}"
 
 ### 2. Sobreescriure variables
 
-fer servir debug per **veure com es sobreescriuren les variables**. Si executem això:
+fer servir debug per **veure com es sobreescriuren les variables**.
+
+Imprimim el nom del host quan executem això:
 
 ```yaml
 ---
@@ -112,8 +120,7 @@ Amb
 ansible-playbook -i inventari debugnodename.yml
 ```
 
-Imprimeix el node que treu de les variables Ansible, però si li passem la variable per línia de
-comandes el resultat és diferent
+Però si li passem la variable per línia de comandes el resultat és diferent
 
 ```bash
 ansible-playbook -i inventari -e ansible_nodename="patata" debugnodename.yml
@@ -189,7 +196,7 @@ ansible scotty -m win_package -a 'path=C:\\tmp\\vlc.msi state=absent'
 
 ### 6. B
 
-### 7. Instal·lar NGinx playbook
+### 7. Instal·lar Nginx playbook
 
 ```yaml
 ---
@@ -242,9 +249,90 @@ També s'han de **Copiar els tres arxius**
 
 ## Templates
 
-### 1. Exemple senzill de templates
+### 0. Llista personatges
 
-### 2. Convertir Nginx a templates
+```yaml
+---
+- hosts: xinxan.local
+
+  vars:
+    pelis:
+      - titol: "Star Wars"
+        personatges:
+          - Luke Skywalker
+          - Leia Organa
+          - Han Solo
+          - Chewbacca
+          - Ben Obi-Wan Kenobi
+          - C-3PO
+          - R2-D2
+          - Dart Vader
+      - titol: "Star Trek"
+        personatges:
+          - James T. Kirk
+          - Spock
+          - Leonard McCoy
+          - Montgomery Scott
+          - Nyota Uhura
+          - Pavel Checkov
+          - Hikaru Sulu
+
+  tasks:
+    - name: Crea el fitxer
+      template:
+        src: pelis.txt.j2
+        dest: "/home/{{ansible_user}}/pelis.txt"
+```
+
+Amb el fitxer:
+
+```jinja
+{% for peli in pelis %}
+
+{{ peli.titol }}
+----------------
+{% for personatge in peli.personatges %}
+- {{ personatge }}
+{% endfor %}
+{% endfor %}
+```
+
+### 1. Genera el fitxer hosts amb les màquines (ansible_facts)
+
+```yaml
+---
+- hosts: xinxan.local
+  become: true
+
+  vars:
+    - fitxer: llista.txt
+    - mostra_loopback: true
+
+  tasks:
+    - name: Crea el fitxer de hosts
+      template:
+        src: "{{ fitxer }}.j2"
+        dest: "/home/{{ansible_user}}/{{ fitxer }}"
+        backup: true
+```
+
+I la plantilla:
+
+```jinja
+# {{ ansible_managed }}
+
+{%if mostra_loopback %}
+# màquina local
+127.0.0.1 {{ inventory_hostname | lower }} {{ inventory_hostname_short | lower }}
+{% endif %}
+
+# altres màquines
+{% for host in groups['all'] %}
+{{ hostvars[host]['ansible_default_ipv4']['address'] | default('#') }} {{ hostvars[host]['ansible_hostname'] | default("")}} {{ host }}{{ '\n' -}}
+{% endfor %}
+```
+
+### 2. Convertir Nginx a templates?
 
 ## Condicions i bucles
 

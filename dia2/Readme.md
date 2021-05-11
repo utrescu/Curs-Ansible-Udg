@@ -194,7 +194,7 @@ ansible scotty -m win_package -a 'path=C:\\tmp\\vlc.msi state=absent'
         state: restarted
 ```
 
-### 6. B
+### 6. Alguna altra cosa?
 
 ### 7. Instal·lar Nginx playbook
 
@@ -363,6 +363,24 @@ Instal·lar joe segons el sistema de paquets:
         state: present
       become: yes
       when: ansible_os_family == "RedHat"
+```
+
+### 2a. Exemple register
+
+```yaml
+---
+- hosts: xinxan.local
+  user: pi
+
+  tasks:
+    - name: pintar Hola
+      shell: echo Hola
+      register: resultat
+
+    - name: Ha funcionat tot bé
+      debug:
+        var: resultat
+      when: resultat.rc == 0
 ```
 
 ### 2. Actualitzar Windows (condicio, register)

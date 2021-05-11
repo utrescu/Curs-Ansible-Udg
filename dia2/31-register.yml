@@ -1,0 +1,13 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  tasks:
+    - name: pintar Hola
+      shell: echo Hola
+      register: resultat
+
+    - name: Ha funcionat tot bé
+      debug:
+        var: resultat
+      when: resultat.rc == 0

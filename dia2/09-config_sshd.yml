@@ -1,5 +1,5 @@
 ---
-- hosts: xinxan.local
+- hosts: ubuntot.local
   tasks:
     - name: COMMON - Copiar arxiu de configuració SSHd
       copy:

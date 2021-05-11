@@ -1,0 +1,8 @@
+---
+- hosts: xinxan.local
+  user: pi
+  become: true
+
+  roles:
+    - viu
+    - editor

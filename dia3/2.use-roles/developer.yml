@@ -1,0 +1,6 @@
+---
+- hosts: xinxan.local
+  become: yes
+  
+  roles:
+    - geerlingguy.git

@@ -1,0 +1,3 @@
+---
+- name: comprova que està viu
+  ping:

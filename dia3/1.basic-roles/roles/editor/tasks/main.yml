@@ -1,0 +1,6 @@
+---
+# tasks file for editor
+- name: Instal·lar editor
+  apt:
+    name: "{{ editor }}"
+    state: present

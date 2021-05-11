@@ -1,0 +1,15 @@
+---
+- hosts: xinxan.local
+  user: pi
+
+  vars:
+    - editor: joe
+
+  tasks:
+    - name: Comprovar que està viu
+      ping:
+
+    - name: Instal·lar editor
+      apt: name= {{ editor }}
+        state=present
+      become: yes

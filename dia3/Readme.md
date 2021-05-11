@@ -46,7 +46,70 @@ Fer playbook:
 
 ### Crear role de nginx
 
+```bash
+
+```
+
 ## 2 Ansible Vault
+
+### xifrar i desxifrar
+
+El contingut secret és:
+
+```yaml
+secret_token: XXXXoXXXX
+```
+
+```bash
+ansible-vault encrypt fitxer.yml
+```
+
+Puc carregar les variables al playbook:
+
+```yaml
+---
+- host: xinxan.local
+  become: yes
+
+  tasks:
+  - name: read secret vars
+    include_vars: "fitxer.yml"
+
+  - name: Usar-les
+    debug:
+      msg: "{{secret_token}}
+```
+
+En un playbook l'hem de cridar demananant per la contrasenya de vault
+
+```bash
+ansible-playbook --ask-vault-pass fitxer.yml
+```
+
+o bé definint-la en un fitxer:
+
+```bash
+ansible-playbook --vault-password-file contra fitxer.yml
+```
+
+Es desxifrar, xifrar un string, ...
+
+```bash
+ansible-vault encrypt-string --vault-password-file contra 'patata' --name 'var'
+```
+
+En els roles es pot definir directament en el directori de variables del sistema:
+
+```text
+group_vars
+├── all
+│  ├── vars.yml
+│  └── vault.yml
+├── alumnes
+│  ├── vars.yml
+│  └── vault.yml
+└── servidors.yml
+```
 
 ## 3 B
 

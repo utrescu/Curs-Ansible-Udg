@@ -1,0 +1,13 @@
+---
+- name: Arrancar un contenidor
+  hosts: localhost
+  collections:
+    - containers.podman
+  tasks:
+    - name: Inicia un contenidor nginx
+      podman_container:
+        name: mymongo
+        image: mongo
+        publish: "27017:27017"
+        state: present
+        rm: yes

@@ -1,0 +1,21 @@
+---
+- name: Arrancar un contenidor
+  hosts: localhost
+  vars:
+   - image: "mongo"
+   - ports: [ "27017:27017" ]
+
+  collections:
+    - community.docker
+  tasks:
+    - name: Inicia un contenidor '{{ image }}'
+      docker_container:
+        name: "my{{image}}"
+        image: "{{ image }}"
+        state: started
+        published_ports: "{{ ports }}"
+        state: started
+        detach: yes
+        auto_remove: yes
+        restart: yes
+

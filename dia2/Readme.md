@@ -85,6 +85,18 @@ descripcio: >
 
 S'hi pot accedir amb `[]` o amb `.`
 
+```bash
+nom
+
+llista[0]
+llista.0
+
+family[0].nom
+family.0.cognom
+
+
+```
+
 ### 1. Ping playbook
 
 ```yaml
@@ -169,6 +181,26 @@ Per desinstal·lar-lo en tenim prou amb:
 
 ```bash
 ansible scotty -m win_package -a 'path=C:\\tmp\\vlc.msi state=absent'
+```
+
+### 5. Update Windows
+
+```yaml
+---
+- hosts: scotty
+
+  tasks:
+    - name: instal·lar actualitzacions crítiques i de seguretat
+      win_updates:
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
+        state: installed
+      register: update_result
+
+    - name: reiniciar
+      win_reboot:
+      when: update_result.reboot_required
 ```
 
 ### 5. Canviar configuració SSH perquè no admeti usuari i contrasenya

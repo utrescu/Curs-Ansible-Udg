@@ -111,10 +111,77 @@ group_vars
 └── servidors.yml
 ```
 
-## 3 B
+## 3 Plugins and collections
 
-## 4 C
+```bash
+mkdir collections
+touch requirements.yml
+```
 
-## 5 Cendrassos
+I hi poso les dependències:
+
+```yaml
+---
+collections:
+  - name: community.docker
+  - name: containers.podman
+```
+
+I les descarrego
+
+```bash
+ansible-galaxy install -r requirements.yml -p collections/
+```
+
+## 3.0 Arrancar mongo en Docker
+
+```yaml
+---
+- name: Arrancar un contenidor
+  hosts: localhost
+  vars:
+   - image: "mongo"
+   - ports: [ "27017:27017" ]
+
+  collections:
+    - community.docker
+  tasks:
+    - name: Inicia un contenidor '{{ image }}'
+      docker_container:
+        name: "my{{image}}"
+        image: "{{ image }}"
+        state: started
+        published_ports: "{{ ports }}"
+        state: started
+        detach: yes
+        auto_remove: yes
+        restart: yes
+```
+
+## 3.1 Carregar la col·lecció de Podman
+
+Desplegar un contenidor Podman de nginx
+
+```yaml
+---
+- name: Arrancar un contenidor
+  hosts: localhost
+  collections:
+    - containers.podman
+  tasks:
+    - name: Inicia un contenidor nginx
+      podman_container:
+        name: mymongo
+        image: mongo
+        expose: "27017:27017"
+        state: present
+        recreate: yes
+```
+
+## 7. Ansible Tower
+
+Tower
+
+## 8 Cendrassos
 
 Veure playbooks amb roles del Cendrassos

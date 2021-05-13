@@ -178,6 +178,25 @@ Desplegar un contenidor Podman de nginx
         recreate: yes
 ```
 
+## 3.2 Crear una col·lecció
+
+Primer creem l'estructura:
+
+```bash
+mkdir collections
+cd collections
+mkdir ansible_collections
+cd ansible_collections
+ansible-galaxy collection init udg.prova
+```
+
+Després només cal col·locar el role en el lloc que toca.
+
+La podem usar instal·lant-la o bé fent un import manual:
+
+```yaml
+```
+
 ## 7. Ansible Tower
 
 Tower

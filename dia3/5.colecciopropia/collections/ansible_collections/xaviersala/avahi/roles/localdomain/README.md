@@ -1,4 +1,4 @@
-# Avahi
+# localdomain
 
 Installs Avahi on Ubuntu and Fedora
 
@@ -20,7 +20,7 @@ Example:
 
     - hosts: servers
       roles:
-         - avahi
+         - localdomain
 
 ## License
 

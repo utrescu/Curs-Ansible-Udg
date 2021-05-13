@@ -195,6 +195,14 @@ Després només cal col·locar el role en el lloc que toca.
 La podem usar instal·lant-la o bé fent un import manual:
 
 ```yaml
+---
+- hosts: ubuntot.local
+  become: true
+  collections:
+    - xaviersala.avahi
+
+  roles:
+    - localdomain
 ```
 
 ## 7. Ansible Tower

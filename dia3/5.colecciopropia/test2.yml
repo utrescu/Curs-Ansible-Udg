@@ -1,0 +1,8 @@
+---
+- hosts: ubuntot.local
+  become: true
+  collections:
+    - xaviersala.avahi
+
+  roles:
+    - localdomain

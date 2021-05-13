@@ -8,19 +8,17 @@
 - name: afegir l'usuari principal al grup 'vboxusers'
   user:
     name: "{{ ansible_ssh_user }}"
-    groups: vboxusers
+    groups: [vboxusers]
     append: yes
 
-- name: Comprova que existeix l'usuari 'alumne'
-  command: "awk -F':' '/^alumne/{ print $1 }' /etc/passwd"
+- name: Comprova que existeix l'usuari '{{alumne_username}}'
+  command: "awk -F':' '/^{{ alumne_username }}/{ print $1 }' /etc/passwd"
   register: existeix_alumne
   changed_when: False
 
-- name: afegir 'alumne' al grup 'vboxusers'
+- name: afegir '{{alumne_username}}' al grup 'vboxusers'
   user:
     name: alumne
-    groups: vboxusers
+    groups: [vboxusers]
     append: yes
-  when: existeix_alumne.stdout | match("alumne")
-
-
+  when: existeix_alumne.stdout | match("{{alumne_username}}")

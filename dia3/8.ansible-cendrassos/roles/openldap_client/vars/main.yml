@@ -1,2 +1,9 @@
 ---
 # vars file for ldap
+ldap_client_paquets:
+  - libpam-ldap
+  - nscd
+  - nslcd
+  - sysv-rc-conf
+  - ldap-auth-client
+  - ldap-utils

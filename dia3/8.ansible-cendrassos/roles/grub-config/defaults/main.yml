@@ -1,14 +1,5 @@
 ---
 # defaults file for grub-config
-grub_password_version: 2
-
 grub_admin: admin
 grub_password: grub.pbkdf2.sha512.10000.3661BE8953AFB1BEE6BF2683CA523CBB67405CDECD7E541DB54990AF02E2B5E870FA668888CB4681991DC1BA8A233CDA5759624B6A40BBCABB9069AE5EC43738.EF29981F4907C94568055FCD30F57FAE0A5E1CE19DF28FD71C6BF6A3FCDD804AA67BBE09008EC85EB6BBBD04D77C53D304012C8C798B750E245CFC1C29ECC579
 grub_unrestricted: true
-
-grub_unrestricted_files:
-  - /etc/grub.d/10_linux
-  - /etc/grub.d/20_linux_xen
-
-grub_mkconfig: /usr/sbin/grub-mkconfig
-

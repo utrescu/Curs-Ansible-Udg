@@ -1,37 +1,26 @@
-Role Name
-=========
+# Role Name
 
 Actualitza les extensions oficials d'Oracle.
 
-El problema era que com que VirtualBox en Ubuntu afegeix el programa en un repositori s'actualitzava normalment. 
+El problema és que com que VirtualBox en Ubuntu afegeix el programa en un repositori s'actualitza
+normalment però després d'actualitzar la versió del programa i la de l'extension pack no quadren
+amb la versió de VirtualBox i en algun cas ha portat problemes.
 
-El problema era que després d'actualitzar les versions de 'extension pack' no quadrava amb la versió de VirtualBox.
+Aquest 'role' comprova si la versió de les extensions quadra amb la versió de VirtualBox instal·lada
+i en cas de que no quadri les actualitza.
 
-Aquest 'role' comprova si la versió de les extensions quadra amb la versió de VirtualBox instal·lada.
+## Requirements
 
-Requirements
-------------
+Necessita tenir VirtualBox instal·lat perquè el control d'errors és rudimentari.
 
-Necessita tenir VirtualBox instal·lat.
+## Example Playbook
 
-Role Variables
---------------
+```yaml
+- hosts: servers
+  roles:
+    - { virtualbox-update }
+```
 
-Dependencies
-------------
-
-Example Playbook
-----------------
-
-    - hosts: servers
-      roles:
-         - { virtualbox-update }
-
-License
--------
+## License
 
 BSD
-
-Author Information
-------------------
-Xavier Sala

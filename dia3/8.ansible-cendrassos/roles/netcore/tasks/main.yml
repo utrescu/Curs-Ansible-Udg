@@ -21,7 +21,7 @@
 
 - name: .NET | Instal·lar el SDK
   package:
-    name: "{{ dotnet_ubuntu_package }}"
+    name: "dotnet-sdk-{{ dotnet_version }}"
     state: present
     update_cache: true
   register: result

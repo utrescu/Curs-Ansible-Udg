@@ -1,14 +1,23 @@
 ---
-# Canviar la contrasenya de root
-#   S'ha de generar un hash:
-#      $ sudo pip install passlib
-#      $ python -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'
+# Canviar la contrasenya de l'usuari que pot fer sudo:
 #
+#  ---- Procediment ----
 #
-#   -- La contrasenya es posa a group_vars/alumnes/vault.yml
+#  1. S'ha de generar un hash de la contrasenya:
+#     Python:
+#      $ python -c 'import crypt; print(crypt.crypt("somesecret", crypt.mksalt(crypt.METHOD_SHA512)))'
 #
-#   El procés es crida amb --ask-vault-pass o --vault-password-file
-
+#     Openssl
+#     $ openssl passwd -6 'contrasenya'
+#
+#  2. La contrasenya es posa a group_vars/alumnes/vault.yml
+#  3. S'ha de xifrar:
+#      $ ansible-vault encrypt vault.yml
+#
+#  ---- NOTA ----
+#
+#   El procés de canvi s'ha de cridar amb --ask-vault-pass o --vault-password-file
+#
 # versió 1: 11/08/2016
 #    - comprovat
 #      // OLD VERSION: $ python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"

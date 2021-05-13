@@ -16,7 +16,7 @@ Cap
 Les variables defineixen l'usuari i la seva contrasenya en format hash
 
 - **user_username**: Nom de l'usuari que es crearà (per defecte 'alumne')
-- **user_password**: Hash de la contrasenya d'aquest usuari (per defecte 'ies2010!')
+- **user_password**: Hash de la contrasenya d'aquest usuari
 
 ## Dependències
 
@@ -24,9 +24,11 @@ Cap
 
 ## Exemple Playbook
 
+```yaml
     - hosts: servers
       roles:
-         - { role: alumne-config, usuari: pepet }
+         - { role: alumne-config, user_username: pepet }
+```
 
 ## License
 

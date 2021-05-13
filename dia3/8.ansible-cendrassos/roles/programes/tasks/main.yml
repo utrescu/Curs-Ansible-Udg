@@ -1,15 +1,20 @@
 ---
 # tasks file for programes
 - name: Update apt cache
-  apt:  update_cache=yes cache_valid_time=3600
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: Instal·lar programes de desenvolupament
-  apt: name={{item}} state=latest
+  apt:
+    name: "{{ item }}"
+    state: latest
   with_items:
-    - "{{ programes.desenvolupament }}"
+    - "{{ desenvolupament }}"
 
-- name: Instal·lar programes diversos
-  apt: name={{item}} state=latest
+- name: Instal·lar programes de SMX
+  apt:
+    name: "{{ item }}"
+    state: latest
   with_items:
-    - "{{ programes.diversos }}"
-
+    - "{{ smx }}"

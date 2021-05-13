@@ -18,6 +18,9 @@
     line: "password_pbkdf2 {{ grub_admin }} {{ grub_password }}"
 
 - name: "No restringir fitxers de Grub ..."
-  replace: dest={{ item }} regexp='^CLASS="(((?!--unrestricted).)*)"$' replace='CLASS="\1 --unrestricted"'
+  replace:
+    dest: "{{ item }}"
+    regexp: '^CLASS="(((?!--unrestricted).)*)"$'
+    replace: 'CLASS="\1 --unrestricted"'
   with_items: "{{grub_unrestricted_files}}"
   when: grub_unrestricted

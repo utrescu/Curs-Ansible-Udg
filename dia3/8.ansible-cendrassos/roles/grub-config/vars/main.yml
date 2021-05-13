@@ -1,0 +1,9 @@
+---
+# vars file for grub-config
+grub_password_version: 2
+
+grub_unrestricted_files:
+  - /etc/grub.d/10_linux
+  - /etc/grub.d/20_linux_xen
+
+grub_mkconfig: /usr/sbin/grub-mkconfig

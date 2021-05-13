@@ -9,22 +9,12 @@
   shell: "vboxmanage list extpacks | grep 'Version:' | cut -d ':' -f 2 | xargs"
   register: extpack_version
 
-- meta: end_play
-  when: 'extpack_version.stdout == virtualbox_version.stdout'
+- name: Acaba si ja estem en la versió correcta
+  meta: end_play
+  when: "extpack_version.stdout == virtualbox_version.stdout"
 
 - name: Descarregar VirtualBox extension pack
   shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox_version.stdout}}/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox_version.stdout}}.vbox-extpack"
 
-# - debug:
-#     msg:
-#     - "Actualitzar '{{ virtualbox_version.stdout }}' - '{{ extpack_version.stdout }}'"
-#   when: extpack_version.stdout != ""
-
-# - debug:
-#     msg:
-#     - "Instal·lar {{ virtualbox_version.stdout }}"
-#   when: extpack_version.stdout == ""
-
 - name: Instal·lar VirtualBox extension pack
   shell: "echo 'y' | VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox_version.stdout}}.vbox-extpack"
-

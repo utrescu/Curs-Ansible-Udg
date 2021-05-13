@@ -7,17 +7,6 @@
 #      d'alguna cosa concreta
 #    - s'ha d'executar amb --ask-vault-pass o --vault-password-file
 #
-#    TODO:
-#    - Segurament s'hauria de fer algun tipus de variable
-#      global per les configuracions que es desitgen?
-#
-# Versió 1: 12/8/2016
-#    Encara no fa la configuració LDAP
-#
-# Versió 1.01: 14/8/2016
-#    Ja funciona la configuració LDAP però requereix
-#    tenir els grups vboxusers i docker o no deixa
-#    fer login gràficament...
 #
 - hosts: alumnes
   user: usuari
@@ -29,12 +18,11 @@
     - { role: programes, tags: programes }
     - { role: chrome, tags: chrome }
     - { role: virtualbox, tags: virtualbox }
-    - { role: java, tags: java }
+    - { role: oraclejava, tags: java }
     - { role: netcore }
     - { role: docker, tags: docker }
     - { role: atom, tags: editors }
     - { role: vscode, tags: editors }
-    - { role: brackets, tags: editors }
     - { role: packet-tracer, tags: packet-tracer }
     - {
         role: openldap_client,

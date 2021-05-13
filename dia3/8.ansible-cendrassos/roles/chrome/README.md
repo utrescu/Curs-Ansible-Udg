@@ -1,34 +1,29 @@
-Chrome
-=========
+# Chrome
 
 Instal·lació de Google Chrome en Ubuntu
 
-Requirements
-------------
+## Requirements
 
 Cap.
 
-Role Variables
---------------
+## Role Variables
 
 No té cap variable especial
 
-Dependencies
-------------
+## Dependencies
 
 Cap.
 
-Example Playbook
-----------------
+## Example Playbook
 
 Per executar-lo només cal:
 
-    - hosts: servers
-      roles:
-         - { role: chrome }
+```yaml
+- hosts: servers
+  roles:
+      - chrome
+```
 
-License
--------
+## License
 
 BSD
-

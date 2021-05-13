@@ -15,7 +15,7 @@
     # Coses noves
     # ------------------
     - { role: programes }
-    - { role: netcore }
+    - { role: netcore, dotnet_version="5.0" }
     - { role: canvia-curs }
     # Actualització normal
     # ------------------

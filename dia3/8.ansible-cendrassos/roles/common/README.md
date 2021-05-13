@@ -1,39 +1,35 @@
-Common
-=========
+# Common
 
-Configuració comuna a tots els ordinadors de la xarxa. 
+Configuració comuna a tots els ordinadors de la xarxa.
 
 Bàsicament el que fa és:
-- Impedir la connexió SSH als alumnes 
+
+- Impedir la connexió SSH als alumnes
   - Es fa perquè es va posar de moda apagar els ordinadors dels altres connectant-s'hi a través de SSH
 
 
-Requirements
-------------
+## Requirements
 
 Cap
 
-Role Variables
---------------
+## Role Variables
 
 Cap
 
-Dependencies
-------------
+## Dependencies
 
 Cap
 
-Example Playbook
-----------------
+## Example Playbook
 
 S'executa amb un Playbook que tingui una forma com aquesta:
 
-    - hosts: servers
-      roles:
-         - { role: common  }
+```yaml
+- hosts: servers
+  roles:
+    - { role: common  }
+```
 
-License
--------
+## License
 
 BSD
-

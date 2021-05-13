@@ -1,34 +1,29 @@
-Java
-=========
+# Instal·lar Oracle Java
 
 Instal·lació d'Oracle Java en Ubuntu fent servir PPA
 
-Requirements
-------------
+## Requirements
 
 Cap
 
-Role Variables
---------------
+## Role Variables
 
 Cap
 
-Dependencies
-------------
+## Dependencies
 
 Cap
 
-Example Playbook
-----------------
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: java }
+```yaml
+- hosts: servers
+  roles:
+      - java
+```
 
-License
--------
+## License
 
 BSD
-

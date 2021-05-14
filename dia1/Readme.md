@@ -2,6 +2,15 @@
 
 ## Instal·lar
 
+Amb pip (per qualsevol plataforma)
+
+```bash
+pip install ansible --user
+```
+
+Pot ser que en alguns casos li falti alguna dependècia de Python (pywinrm, etc..)
+
+
 ### Linux Master
 
 ```bash

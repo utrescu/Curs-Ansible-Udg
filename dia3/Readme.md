@@ -216,7 +216,7 @@ La podem usar instal·lant-la o bé fent un import manual:
 
 ## 7. Ansible Tower
 
-Tower
+Tower i AWX
 
 ## 8 Cendrassos
 

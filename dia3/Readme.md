@@ -127,6 +127,15 @@ collections:
   - name: containers.podman
 ```
 
+també es pot definir un repositori de git:
+
+```yaml
+collections:
+  - name: git@github.com:utrescu/avahi.git
+    type: git
+    version: devel
+```
+
 I les descarrego
 
 ```bash

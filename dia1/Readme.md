@@ -104,7 +104,7 @@ Faig inventari en Windows:
 
 ```ini
 [wins]
-scotty ansible_host=84.88.128.241
+spok ansible_host=23.12.24.235
 
 [wins:vars]
 ansible_user=u000000@SIS.TI.UDG.ES
@@ -115,7 +115,7 @@ ansible_winrm_server_cert_validation=ignore
 ```
 
 ```bash
-ansible scotty -i inventari -k -m win_ping
+ansible spok -i inventari -k -m win_ping
 ```
 
 ## Comandes a localhost
@@ -222,11 +222,11 @@ ansible localhost -m shell -a "echo hola $(hostname)"
 ### shell en Windows
 
 ```bash
-ansible scotty -i inventari -m win_shell -a "echo '$HOSTNAME'"
+ansible spok -i inventari -m win_shell -a "echo '$HOSTNAME'"
 ```
 
 ```bash
-ansible scotty -i inventari -m win_comand -a "ipconfig"
+ansible spok -i inventari -m win_comand -a "ipconfig"
 ```
 
 ## Obtenir informació de la màquina: Setup
@@ -246,7 +246,7 @@ ansible xinxan.local -i hosts -u pi -m setup -a "gather_subset=min"
 ### setup windows
 
 ```bash
-ansible scotty -i inventari -m setup
+ansible spok -i inventari -m setup
 ```
 
 No haver de definir l'inventari cada cop?
@@ -264,7 +264,7 @@ ansible xinxan.local -i hosts -u pi -m copy -a "src='./hosts' dest='/home/pi/hos
 
 ```bash
 touch readme.txt
-ansible scotty -i inventari -k -m win_copy -a 'src=readme.txt dest=C:\\readme.txt'
+ansible spok -i inventari -k -m win_copy -a 'src=readme.txt dest=C:\\readme.txt'
 ```
 
 Paràmetre `force:yes`
@@ -288,7 +288,7 @@ ansible xinxan.local -b -m apt "name=joe state=absent"
 ### Instal.lar software en Windows
 
 ```bash
-ansible scotty.udg.edu -i inventari -k -m win_chocolatey -a "name=7zip.install state=present"
+ansible spok.udg.edu -i inventari -k -m win_chocolatey -a "name=7zip.install state=present"
 ```
 
 ## Serveis

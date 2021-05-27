@@ -73,7 +73,7 @@ dns_lookup_kdc = false
         fcc-mit-ticketflags = true
 
 [realms]
-SISTI.UDG.ES = {
+SISTIUDG.ES = {
    kdc =  dc.udg.edu
    # admin_server =  dc.udg.edu
    default_domain = udg.edu
@@ -107,7 +107,7 @@ Faig inventari en Windows:
 spok ansible_host=23.12.24.235
 
 [wins:vars]
-ansible_user=u000000@SIS.TI.UDG.ES
+ansible_user=u000000@SISTI.UDG.ES
 ansible_password=LaContrasenya
 ansible_connection=winrm
 ansible_winrm_transport=kerberos

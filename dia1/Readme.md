@@ -59,7 +59,7 @@ I configurar-lo
 
 ```ini
 [libdefaults]
-default = SIS.TI.UDG.ES
+default = SISTI.UDG.ES
 nslookup_realm = false
 dns_lookup_kdc = false
 
@@ -73,15 +73,15 @@ dns_lookup_kdc = false
         fcc-mit-ticketflags = true
 
 [realms]
-SIS.TI.UDG.ES = {
-   kdc =  dcsis5.udg.edu
-   # admin_server =  dcsis5.udg.edu
+SISTI.UDG.ES = {
+   kdc =  dc.udg.edu
+   # admin_server =  dc.udg.edu
    default_domain = udg.edu
 }
 
 [domain_realm]
-.udg.edu = SIS.TI.UDG.ES
-udg.edu = SIS.TI.UDG.ES
+.udg.edu = SISTI.UDG.ES
+udg.edu = SISTI.UDG.ES
 ```
 
 ## Comprovar ping

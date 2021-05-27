@@ -107,8 +107,8 @@ Faig inventari en Windows:
 scotty ansible_host=84.88.128.241
 
 [wins:vars]
-ansible_user=u3001149@SIS.TI.UDG.ES
-ansible_password=NoEn3BeA8Llocs
+ansible_user=u000000@SIS.TI.UDG.ES
+ansible_password=LaContrasenya
 ansible_connection=winrm
 ansible_winrm_transport=kerberos
 ansible_winrm_server_cert_validation=ignore
